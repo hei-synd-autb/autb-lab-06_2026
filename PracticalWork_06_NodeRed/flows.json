@@ -781,6 +781,178 @@
         }
     },
     {
+        "id": "e45e312c80fc001e",
+        "type": "ctrlx-config",
+        "name": "Nodered_CtrlX",
+        "hostname": "192.168.0.200",
+        "debug": false
+    },
+    {
+        "id": "c5b0190b901ecb86",
+        "type": "ctrlx-config-subscription",
+        "device": "e45e312c80fc001e",
+        "name": "Subscribe",
+        "publishIntervalMs": "",
+        "publishIntervalUnits": "seconds",
+        "samplingInterval": "",
+        "samplingIntervalUnits": "seconds",
+        "errorInterval": "",
+        "errorIntervalUnits": "seconds",
+        "keepaliveInterval": "",
+        "keepaliveIntervalUnits": "minutes",
+        "queueSize": "",
+        "queueBehaviour": "DiscardOldest",
+        "deadbandValue": ""
+    },
+    {
+        "id": "926d3079c9560d19",
+        "type": "ui-base",
+        "name": "Home",
+        "path": "/dashboard",
+        "appIcon": "factory",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "fixed",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": "1",
+        "showDisconnectNotification": true,
+        "allowInstall": true
+    },
+    {
+        "id": "328b4649a9ced4a0",
+        "type": "ui-page",
+        "name": "Alarms",
+        "ui": "926d3079c9560d19",
+        "path": "/page4",
+        "icon": "alarm-light",
+        "layout": "notebook",
+        "theme": "8966a7b403a8fb88",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 2,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "7d8adc78da567ef2",
+        "type": "ui-group",
+        "name": "Alarms",
+        "page": "328b4649a9ced4a0",
+        "width": "6",
+        "height": "1",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "5794c6df8ea5c237",
+        "type": "ui-group",
+        "name": "Alarms History",
+        "page": "328b4649a9ced4a0",
+        "width": "6",
+        "height": "1",
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "3d6ba5b3b7bc8bec",
+        "type": "ui-group",
+        "name": "Warnings",
+        "page": "328b4649a9ced4a0",
+        "width": "6",
+        "height": "1",
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "937ec03369986b60",
+        "type": "ui-page",
+        "name": "Parameters",
+        "ui": "926d3079c9560d19",
+        "path": "/Tests",
+        "icon": "cog",
+        "layout": "notebook",
+        "theme": "8966a7b403a8fb88",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 3,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "85c716cf325ed57c",
+        "type": "ui-group",
+        "name": "Test_Param",
+        "page": "937ec03369986b60",
+        "width": "6",
+        "height": "1",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
         "id": "66c6923e3822666a",
         "type": "ui-page",
         "name": "User Interface for Lab 06",
@@ -815,30 +987,6 @@
         "className": "",
         "visible": "true",
         "disabled": "false"
-    },
-    {
-        "id": "e45e312c80fc001e",
-        "type": "ctrlx-config",
-        "name": "Nodered_CtrlX",
-        "hostname": "192.168.0.200",
-        "debug": false
-    },
-    {
-        "id": "c5b0190b901ecb86",
-        "type": "ctrlx-config-subscription",
-        "device": "e45e312c80fc001e",
-        "name": "Subscribe",
-        "publishIntervalMs": "",
-        "publishIntervalUnits": "seconds",
-        "samplingInterval": "",
-        "samplingIntervalUnits": "seconds",
-        "errorInterval": "",
-        "errorIntervalUnits": "seconds",
-        "keepaliveInterval": "",
-        "keepaliveIntervalUnits": "minutes",
-        "queueSize": "",
-        "queueBehaviour": "DiscardOldest",
-        "deadbandValue": ""
     },
     {
         "id": "bb97738361048557",
@@ -947,104 +1095,6 @@
         "groupType": "default"
     },
     {
-        "id": "926d3079c9560d19",
-        "type": "ui-base",
-        "name": "Home",
-        "path": "/dashboard",
-        "appIcon": "factory",
-        "includeClientData": true,
-        "acceptsClientConfig": [
-            "ui-notification",
-            "ui-control"
-        ],
-        "showPathInSidebar": false,
-        "headerContent": "page",
-        "navigationStyle": "fixed",
-        "titleBarStyle": "default",
-        "showReconnectNotification": true,
-        "notificationDisplayTime": "1",
-        "showDisconnectNotification": true,
-        "allowInstall": true
-    },
-    {
-        "id": "328b4649a9ced4a0",
-        "type": "ui-page",
-        "name": "Alarms",
-        "ui": "926d3079c9560d19",
-        "path": "/page4",
-        "icon": "alarm-light",
-        "layout": "notebook",
-        "theme": "8966a7b403a8fb88",
-        "breakpoints": [
-            {
-                "name": "Default",
-                "px": "0",
-                "cols": "3"
-            },
-            {
-                "name": "Tablet",
-                "px": "576",
-                "cols": "6"
-            },
-            {
-                "name": "Small Desktop",
-                "px": "768",
-                "cols": "9"
-            },
-            {
-                "name": "Desktop",
-                "px": "1024",
-                "cols": "12"
-            }
-        ],
-        "order": 2,
-        "className": "",
-        "visible": "true",
-        "disabled": "false"
-    },
-    {
-        "id": "7d8adc78da567ef2",
-        "type": "ui-group",
-        "name": "Alarms",
-        "page": "328b4649a9ced4a0",
-        "width": "6",
-        "height": "1",
-        "order": 1,
-        "showTitle": true,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
-    },
-    {
-        "id": "5794c6df8ea5c237",
-        "type": "ui-group",
-        "name": "Alarms History",
-        "page": "328b4649a9ced4a0",
-        "width": "6",
-        "height": "1",
-        "order": 2,
-        "showTitle": true,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
-    },
-    {
-        "id": "3d6ba5b3b7bc8bec",
-        "type": "ui-group",
-        "name": "Warnings",
-        "page": "328b4649a9ced4a0",
-        "width": "6",
-        "height": "1",
-        "order": 3,
-        "showTitle": true,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
-    },
-    {
         "id": "e1f3bcea95b360ed",
         "type": "ui-group",
         "name": "Test Alarms and Warnings",
@@ -1066,56 +1116,6 @@
         "width": "6",
         "height": "1",
         "order": 4,
-        "showTitle": true,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
-    },
-    {
-        "id": "937ec03369986b60",
-        "type": "ui-page",
-        "name": "Parameters",
-        "ui": "926d3079c9560d19",
-        "path": "/Tests",
-        "icon": "cog",
-        "layout": "notebook",
-        "theme": "8966a7b403a8fb88",
-        "breakpoints": [
-            {
-                "name": "Default",
-                "px": "0",
-                "cols": "3"
-            },
-            {
-                "name": "Tablet",
-                "px": "576",
-                "cols": "6"
-            },
-            {
-                "name": "Small Desktop",
-                "px": "768",
-                "cols": "9"
-            },
-            {
-                "name": "Desktop",
-                "px": "1024",
-                "cols": "12"
-            }
-        ],
-        "order": 3,
-        "className": "",
-        "visible": "true",
-        "disabled": "false"
-    },
-    {
-        "id": "85c716cf325ed57c",
-        "type": "ui-group",
-        "name": "Test_Param",
-        "page": "937ec03369986b60",
-        "width": "6",
-        "height": "1",
-        "order": 1,
         "showTitle": true,
         "className": "",
         "visible": "true",
@@ -1465,7 +1465,9 @@
         "className": "",
         "x": 590,
         "y": 1060,
-        "wires": []
+        "wires": [
+            []
+        ]
     },
     {
         "id": "fb3ab66a497550f6",
