@@ -9,31 +9,37 @@
 Course AutB
 
 Author: [Cédric Lenoir](mailto:cedric.lenoir@hevs.ch)
+> Version 2026, V1.0 
 
-# LAB 06 Pack & PLCopen
-[Die deutsche Version ist hier verfügbar:](README_DE.md)
+# LAB 06 
+## PackML & PLCopen
 
-## Version
--  CtrlX PLC: 2.6.7
--  Node RED : 4.0.5
--  @flowfuse/node-red-dashboard: 1.24.2
--  node-red-contrib-ctrlx-automation: 1.9.8
 
-## Objectif du travail pratique
--   [ ] Utiliser des Function Block du type PLCopen dans un contexte PackML
+
+
+## Objectifs
+-   [ ] Utiliser des Function Block du type PLCopen dans un contexte PackML.
 -   [ ] Implémenter des alarmes et des warnings pour surveiller le système.
 
 ## Règles de codage
--   Vous devez travailler uniquement dans **PRG_Student**.
--   **PRG_Student** est un module parmi d'autres.
--   Les modules d'axes servent à gérer la mise sous couple des moteurs et inversement vous n'avez pas à le faire.
--  Un bref aperçu de [FB_Stop](MC_MoveAbsolute_AND_MC_Stop.md) et [FB_MoveAbsolute](MC_MoveAbsolute_AND_MC_Stop.md).
--  [Documentation](#documentation).
+-   Vous devez programmer uniquement dans **PRG_Student**.
+-   Le projet comporte déjà des blocs remplissant un certain nombres de fonctionnalités (gestion des états du PackML, la mise sous tension des axes, etc.)
+
+
+
+## Documentation
+
+-   [For Gripper Function Blocks online](FB_Gripper.md)
+-   [HEVS PackTag User Interface](HEVS_PackTag_UI.md)
+-   [HEVS Alarms](FB_HEVS_SetAlarm.md)
+-   [HEVS Warnings](FB_HEVS_SetWarning.md)
+-   [MC_Stop & MC_MoveAbsolute](MC_MoveAbsolute_AND_MC_Stop.md)
+
 
 ### Sécurité
-L'axe Z est prévu pour remonter pendant la phase de Resetting afin d'éviter les risques de Crash.
+L'axe Z est déjà programmé pour remonter pendant l'état "Resetting" afin d'éviter les risques de Crash.
 
-Il sert d'exemple: **FB_ModuleAxis_Z** utilise **ACT_Resetting**
+Vous pouvez vous inspirer du code ci-dessous pour implémenter votre programme : **FB_ModuleAxis_Z** utilise **ACT_Resetting**.
 ```iecst
 (*
 	Manage Resetting
@@ -68,7 +74,9 @@ END_IF
 
 ```
 
-Le FB mcMoveAbs est appelé en dehors de la State Machine afin d'être toujours appelé et ne pas rester dans un état indéterminé.
+L'instance du FB ``MC_MoveAbsolute`` (par exemple : ``mcMoveAbs``) est appelée en dehors de la State Machine afin de ne jamais rester dans un état indéterminé.
+
+Exemple :
 
 ```iecst
 mcMoveAbs.Execute := (axisResetting = E_AxisResetting.eMotionResetPos);
@@ -79,21 +87,21 @@ mcMoveAbs(Position := 100,
 
 ```
 
-Vous pouvez réutiliser le même FB ``MC_MoveAbsolute``, mais en utilisant une nouvelle instance, par exemple: ``mcMyMove``.
+
 
 ### Etat réservé
-L'état Execute en mode Manuel est réservé pour une activité de jog.
-Vous pouvez utiliser les autres état et modes.
+L'état Execute en mode Manuel est réservé pour le mode "jog".
+Vous pouvez utiliser les autres états et modes.
 
-### Principe PackML HEVS
-Le Pack façon HEVS gère automatiquement les états.
+### Principe PackML "HES-SO Valais-Wallis"
+Le PackML développé au sein de la HES-SO Valais-Wallis gère automatiquement les états.
 **ACT_PackManager** et réservé pour la gestion du module.
 
-Vous ne codez que dans les actions des états qui sont nécessaire, principalement dans **Pack_Execute**. 
+Vous ne codez que dans les actions des états qui sont nécessaires.
 
 
 ### Implémentation des alarmes et des warnings
-Vous appelez vos Warnings et Alarms dans **ACT_WarningAndAlarms**. Voir ci-dessous dans [documentation](#documentation) les exemples de code.
+Vous appelez vos Warnings et Alarmes dans **ACT_WarningAndAlarms**. Voir dans [documentation](#documentation) les exemples de code.
 
 ### A propos du Gripper
 Le gripper est programmé pour être pilotable manuellement, sauf dans les conditions suivantes:
@@ -107,7 +115,7 @@ IF NOT ((PackTag.hevsUI.uiStateExecute AND (PackTag.Status.UnitModeCurrent = E_P
 END_IF
 
 ```
-Ce qui signifie que les deux Function Blocks peuvent être utilisés dans tous les autres états.
+Ce qui signifie que les blocs fonctionnels "FB_OpenGripper" et "FB_CloseGripper" peuvent être utilisés dans tous les autres états.
 
 
 ## URS User Request Specification
@@ -115,14 +123,14 @@ Ce qui signifie que les deux Function Blocks peuvent être utilisés dans tous l
 
 |URS ID |Specification|
 |-------|-------------|
-|0. |Starting|
+|0. |**Starting**|
 |0.1   |Dans cet état, les axes X et Z vont se positionner aux positions **X = -100** et **Z = 100**.|
 |0.2   |Quand les deux axes sont en position, on passe en Execute.|
 |1. |**Execute**|
 |1.1 |Les axes X et Z doivent se déplacer selon le tableau et [dessin ci-dessous](#details-for-square).|
-|1.2. |On peut varier la vitesse, l'accélération et le jerk depuis le HMI.|
+|1.2. |On peut modifier la vitesse, l'accélération et le jerk depuis le HMI Node-RED.|
 |1.3. |Le gripper est activé selon le [tableau ci-dessous](#details-for-square).|
-|1.4. |Le mouvement continue en boucle, 1-2-3-5-1...|
+|1.4. |Le mouvement s'exécute en boucle, 1-2-3-4-1...|
 |2. |**Hold**|
 |2.1 |Si on appuie sur le bouton Hold du HMI Node-RED, les axes sont stoppés immédiatement avec le FB_Stop.|
 |2.2 |Si on appuie sur le bouton Unhold du HMI Node-RED, le système recommence la séquence Execute.|
@@ -138,8 +146,7 @@ Ce qui signifie que les deux Function Blocks peuvent être utilisés dans tous l
 |5.2 |Si on coupe l'air comprimé et que le gripper ne s'ouvre pas, on génère une alarme de niveau Stoppe avec un message.|
 
 
-### Complément
-On peut aussi tester Complete qui devrait pouvoir repartir en resetting avec un Reset.
+
 
 
 ### Details for Square
@@ -153,7 +160,8 @@ On peut aussi tester Complete qui devrait pouvoir repartir en resetting avec un 
 |1  |0                 |50      |eOpen       |500        |2      |
 
 -  Velocity_m_s        := 0.05;
--  Acceleleration_m_s2 := 1;
+-  Acceleration_m_s2   := 1;
+-  Deceleration_m_s2   := 1;
 -  Jerk_m_s3           := 10;
 
 <div style="text-align: center;">
@@ -165,18 +173,11 @@ On peut aussi tester Complete qui devrait pouvoir repartir en resetting avec un 
 </div>
 
 
-## Documentation
 
--   [For Gripper Function Blocks online](FB_Gripper.md)
--   [HEVS PackTag User Interface](HEVS_PackTag_UI.md)
--   [HEVS Alarms](FB_HEVS_SetAlarm.md)
--   [HEVS Warnings](FB_HEVS_SetWarning.md)
--   [MC_Stop & MC_MoveAbsolute](MC_MoveAbsolute_AND_MC_Stop.md)
 
 
 ### About Programs
 
-In cltrX PLC Engineering
 
 Function blocks for robot are in **HEVS_Robot**.
 
@@ -194,8 +195,8 @@ The synthesis of modules for the process/Unit are here in **ACT_Build_Pack_SC** 
 	States SC
 *)
 xProcess_SC := fbModuleAxis_X.SC AND
-		       fbModuleAxis_Y.SC AND
-		       fbModuleAxis_Z.SC AND
+               fbModuleAxis_Y.SC AND
+               fbModuleAxis_Z.SC AND
                PRG_Student.SC;
 ```
 
@@ -243,3 +244,8 @@ PRG_GetTime_CtrlX();
 *)
 PRG_Process();
 ```
+
+### Modification des paramètres dans Node-RED
+
+Exemple pour l'affichage / modification de la vitesse : 
+
