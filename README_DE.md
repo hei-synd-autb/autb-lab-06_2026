@@ -237,7 +237,43 @@ PRG_GetTime_CtrlX();
 *)
 PRG_Process();
 ```
+</br>
+</br>
 
-### Ändern der Einstellungen in Node-RED
+### Anzeigen / Ändern von Parametern über Node-RED
 
-Beispiel für die Anzeige/Änderung der Geschwindigkeit : 
+</br>
+</br>
+Beispiel für die Geschwindigkeit : 
+
+</br>
+</br>
+<div style="text-align: center;">
+<figure>
+    <img src="./img/NodeRed_Velocity.png"
+         alt="Image NodeRed_Velocity.png">
+    <figcaption>Dashboard 2 , number input</figcaption>
+</figure>
+</div>
+
+</br>
+</br>
+
+<div style="text-align: center;">
+<figure>
+    <img src="./img/NodeRed_Subscribe_Write.png"
+         alt="Image NodeRed_Subscribe_Write.png">
+    <figcaption>Subscribe - Input - Conversion - Write</figcaption>
+</figure>
+</div>
+
+</br>
+</br>
+
+<div style="text-align: center;">
+<figure>
+    <img src="./img/NodeRed_ConvertToFloat64.png"
+         alt="Image NodeRed_ConvertToFloat64.png">
+    <figcaption>function : Convert to "float64"</figcaption>
+</figure>
+</div>
