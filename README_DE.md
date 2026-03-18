@@ -267,6 +267,23 @@ Beispiel für die Geschwindigkeit :
 </figure>
 </div>
 
+
+</br>
+</br>
+
+<div style="text-align: center;">
+<figure>
+    <img src="./img/Configuration_NumberInput.png"
+         alt="Image Configuration_NumberInput.png">
+    <figcaption>Number input : Configuration</figcaption>
+</figure>
+</div>
+
+
+
+
+
+
 </br>
 </br>
 
